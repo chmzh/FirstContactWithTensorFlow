@@ -39,10 +39,15 @@ w1 = tf.Variable(tf.random_normal([2,3],stddev=1.0))
 b1 = tf.Variable(tf.constant(0.0,shape=[3]))
 x1 = tf.constant([[0.7, 0.9]])
 y1 = tf.nn.relu(tf.matmul(x1,w1) + b1)
+
+x = tf.constant([[[1, 1, 1],[2,2,2]], [[1, 1, 1],[3,3,3]]])
+dim = 0;
+# dim=0 表示第1维所有元素分别相加 =1 表示第2维所有元素分别相加 =2 表示第3维所有元素分别相加
+x1 = tf.reduce_sum(x,dim)
 init_op = tf.global_variables_initializer()
 with tf.Session() as sess:
     sess.run(init_op)
-    print(sess.run(y1))
+    print(sess.run(x1))
 
 
 
