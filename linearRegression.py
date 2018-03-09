@@ -11,10 +11,12 @@ for i in range(NUM_POINTS):
 x_data = [v[0] for v in vectors]
 y_data = [v[1] for v in vectors]
 
-# plt.plot(x_data,y_data,'ro',label='original data')
-# plt.legend()
-# plt.show()
 
+
+def plot(x_data,y_data):
+    plt.plot(x_data,y_data,'ro',label='original data')
+    plt.legend()
+    plt.show()
 
 
 import tensorflow as tf
@@ -33,5 +35,14 @@ with tf.Session() as sess:
     for step in range(8):
         sess.run(train)
         #W,b 逼近于 w1,b1
-        print(step,sess.run(W),sess.run(b))
+        #print(step,sess.run(W),sess.run(b),sess.run(loss))
+
+        plt.plot(x_data,y_data,'ro')
+        plt.plot(x_data,sess.run(W) * x_data + sess.run(b))
+        plt.xlabel('x')
+        plt.xlim(-2,2)
+        plt.ylim(0.1,0.6)
+        plt.ylabel('y')
+        plt.legend()
+        plt.show()
 
